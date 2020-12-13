@@ -6,14 +6,14 @@
  |- worker2 
 ```
 
-spin ip up three node cluster
+spin up three node cluster
 
 * requirements
 ```
 vagrant
 virtualbox
 ```
-To spin up virtual machines 
+To start vms 
 ```
 ./create-cluster.sh
 ```
