@@ -1,10 +1,6 @@
 # k8s-cluster
 
-```bash
-- control 
- |- worker1
- |- worker2 
-```
+
 
 spin up three node cluster
 
