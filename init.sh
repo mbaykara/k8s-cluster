@@ -18,10 +18,8 @@ echo 'source <(kubectl completion bash)' >>~/.bashrc
 #source /usr/share/bash-completion/bash_completion
 kubectl completion bash >/etc/bash_completion.d/kubectl
 # Set iptables bridging
-cat <<EOF >  /etc/sysctl.d/k8s.conf
-net.bridge.bridge-nf-call-ip6tables = 1
-net.bridge.bridge-nf-call-iptables = 1
-EOF
+
+echo 'net.bridge.bridge-nf-call-iptables = 1' >> /etc/sysctl.d/k8s.conf
 sysctl --system
 
 #load a couple of necessary modules 

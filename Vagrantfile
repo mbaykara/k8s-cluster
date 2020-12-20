@@ -14,8 +14,9 @@ Vagrant.configure("2") do |config|
   end
   w.vm.provision "shell", inline: <<-SHELL
     apt-get update
-    apt-get install -y git
+    apt-get install -y git wget
     git clone https://github.com/sandervanvugt/kubernetes
+    wget https://github.com/mbaykara/k8s-cluster/blob/main/init.sh
     cd kubernetes && swapoff -a 
    SHELL
   end
@@ -31,7 +32,8 @@ Vagrant.configure("2") do |config|
 
    w.vm.provision "shell", inline: <<-SHELL
      apt-get update
-     apt-get install -y git
+     apt-get install -y git wget
+     wget https://github.com/mbaykara/k8s-cluster/blob/main/init.sh
      git clone https://github.com/sandervanvugt/kubernetes
      cd kubernetes && swapoff -a 
    SHELL
