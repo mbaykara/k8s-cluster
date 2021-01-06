@@ -1,41 +1,57 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-
 
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/bionic64"
-  config.vm.define "control" do | w |
-  w.vm.hostname = "control"
+  config.vm.define "master" do | w |
+  w.vm.hostname = "master"
   w.vm.network "private_network", ip: "192.168.33.13"
   w.vm.provider "virtualbox" do |vb|
     vb.memory = "4096"
     vb.cpus = 2
-    vb.name = "control"
+    vb.name = "master"
+  end
+  w.vm.provision "setup-hosts", :type => "shell", :path => "k8s-setup.sh" do |s|
+    s.args = ["enp0s31f6"]
   end
   w.vm.provision "shell", inline: <<-SHELL
     apt-get update
-    apt-get install -y git wget
-    git clone https://github.com/sandervanvugt/kubernetes
-    wget https://github.com/mbaykara/k8s-cluster/blob/main/init.sh
-    cd kubernetes && swapoff -a 
+    apt-get install -y git wget vim curl
    SHELL
   end
-  
+
   config.vm.box = "ubuntu/bionic64"
-  config.vm.define "worker1" do | w |
-      w.vm.network "private_network", ip: "192.168.33.11"
+  config.vm.define "worker-1" do | w |
+      w.vm.hostname = "worker-1"
+      w.vm.network "private_network", ip: "192.168.33.14"
+
       w.vm.provider "virtualbox" do |vb|
         vb.memory = "1024"
         vb.cpus = 1
-        vb.name = "worker1"
+        vb.name = "worker-1"
       end
-
+        w.vm.provision "setup-hosts", :type => "shell", :path => "k8s-setup.sh" do |s|
+    s.args = ["enp0s31f6"]
+  end
    w.vm.provision "shell", inline: <<-SHELL
      apt-get update
-     apt-get install -y git wget
-     wget https://github.com/mbaykara/k8s-cluster/blob/main/init.sh
-     git clone https://github.com/sandervanvugt/kubernetes
-     cd kubernetes && swapoff -a 
+     apt-get install -y git wget vim 
    SHELL
+  end 
+  config.vm.box = "ubuntu/bionic64"
+  config.vm.define "worker-2" do | w |
+      w.vm.hostname = "worker-2"
+      w.vm.network "private_network", ip: "192.168.33.15"
+
+      w.vm.provider "virtualbox" do |vb|
+        vb.memory = "1024"
+        vb.cpus = 1
+        vb.name = "worker-2"
+      end
+        w.vm.provision "setup-hosts", :type => "shell", :path => "k8s-setup.sh" do |s|
+    s.args = ["enp0s31f6"]
   end
+   w.vm.provision "shell", inline: <<-SHELL
+     apt-get update
+     apt-get install -y git wget vim curl
+   SHELL
+  end 
 end
