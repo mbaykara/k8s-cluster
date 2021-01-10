@@ -3,6 +3,9 @@
 
 
 spin up three node cluster
+* Master/Control Node
+* Worker-1
+* Worker-2
 
 Details description see [here](https://medium.com/p/99a82605bfcc/edit)
 
