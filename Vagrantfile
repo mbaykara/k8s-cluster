@@ -9,8 +9,7 @@ Vagrant.configure("2") do |config|
     vb.cpus = 2
     vb.name = "master"
   end
-  w.vm.provision "setup-hosts", :type => "shell", :path => "k8s-setup.sh" do |s|
-    s.args = ["enp0s31f6"]
+  w.vm.provision "setup-hosts", :type => "shell", :path => "k8s-setup-master.sh" do |s|
   end
   w.vm.provision "shell", inline: <<-SHELL
     apt-get update
@@ -28,9 +27,8 @@ Vagrant.configure("2") do |config|
         vb.cpus = 1
         vb.name = "worker-1"
       end
-        w.vm.provision "setup-hosts", :type => "shell", :path => "k8s-setup.sh" do |s|
-    s.args = ["enp0s31f6"]
-  end
+      w.vm.provision "setup-hosts", :type => "shell", :path => "k8s-setup-master.sh" do |s|
+    end
    w.vm.provision "shell", inline: <<-SHELL
      apt-get update
      apt-get install -y git wget vim 
@@ -46,12 +44,11 @@ Vagrant.configure("2") do |config|
         vb.cpus = 1
         vb.name = "worker-2"
       end
-        w.vm.provision "setup-hosts", :type => "shell", :path => "k8s-setup.sh" do |s|
-    s.args = ["enp0s31f6"]
+        w.vm.provision "setup-hosts", :type => "shell", :path => "k8s-setup-master.sh" do |s|
   end
    w.vm.provision "shell", inline: <<-SHELL
      apt-get update
      apt-get install -y git wget vim curl
    SHELL
-  end 
+  end  
 end
