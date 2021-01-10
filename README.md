@@ -3,9 +3,10 @@
 
 
 spin up three node cluster
-* Master/Control Node
-* Worker-1
-* Worker-2
+
+* 192.168.33.13 master
+* 192.168.33.14 worker-1
+* 192.168.33.15 worker-2
 
 Details description see [here](https://medium.com/p/99a82605bfcc/edit)
 
