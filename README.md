@@ -8,7 +8,7 @@ spin up three node cluster
 * 192.168.33.14 worker-1
 * 192.168.33.15 worker-2
 
-Details description see [here](https://medium.com/p/99a82605bfcc/edit)
+Details description see [here](https://baykara.medium.com/setup-own-kubernetes-cluster-via-virtualbox-99a82605bfcc)
 
 * requirements
 ```
