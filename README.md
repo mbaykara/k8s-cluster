@@ -1,4 +1,4 @@
-PS: Don't hesitate  give start ⭐ :heart: :star: 
+PS: Don't hesitate  give a star ⭐ :heart: :star: 
 
 # k8s-cluster
 
