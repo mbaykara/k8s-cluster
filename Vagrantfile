@@ -51,4 +51,21 @@ Vagrant.configure("2") do |config|
      apt-get install -y git wget vim curl
    SHELL
   end  
+  config.vm.box = "ubuntu/bionic64"
+  config.vm.define "worker-3" do | w |
+      w.vm.hostname = "worker-3"
+      w.vm.network "private_network", ip: "192.168.33.16"
+
+      w.vm.provider "virtualbox" do |vb|
+        vb.memory = "1024"
+        vb.cpus = 1
+        vb.name = "worker-3"
+      end
+        w.vm.provision "setup-hosts", :type => "shell", :path => "k8s-setup-master.sh" do |s|
+  end
+   w.vm.provision "shell", inline: <<-SHELL
+     apt-get update
+     apt-get install -y git wget vim curl
+   SHELL
+  end
 end
